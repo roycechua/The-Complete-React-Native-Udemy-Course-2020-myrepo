@@ -3,7 +3,7 @@
 	url = https://github.com/roycechua23/react-native-tracker-app
 [submodule "RestaurantSearchApp"]
 	path = RestaurantSearchApp
-	url = https://github.com/roycechua23/RestauranntSearchApp
+	url = https://github.com/roycechua23/RestaurantSearchApp
 [submodule "blogApp-React-Native"]
 	path = blogApp-React-Native
 	url = https://github.com/roycechua23/blogApp-React-Native
