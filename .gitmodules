@@ -4,3 +4,6 @@
 [submodule "RestaurantSearchApp"]
 	path = RestaurantSearchApp
 	url = https://github.com/roycechua23/RestauranntSearchApp
+[submodule "blogApp-React-Native"]
+	path = blogApp-React-Native
+	url = https://github.com/roycechua23/blogApp-React-Native
