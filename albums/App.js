@@ -1,6 +1,6 @@
 // Import a library to help create a component
 import React from 'react';
-import { View } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import Header from './src/components/Header';
 import AlbumList from './src/components/AlbumList';
 // import ReactNative from 'react-native';
@@ -10,10 +10,10 @@ import AlbumList from './src/components/AlbumList';
 // We need to return only one top level tag
 // View tag can contain multiple components
 const App = () => (
-    <View>
+    <SafeAreaView>
         <Header headerText={'Albums'}/>
         <AlbumList/>
-    </View>
+    </SafeAreaView>
 );
 
 // Alternative way
