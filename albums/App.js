@@ -10,7 +10,7 @@ import AlbumList from './src/components/AlbumList';
 // We need to return only one top level tag
 // View tag can contain multiple components
 const App = () => (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
         <Header headerText={'Albums'}/>
         <AlbumList/>
     </SafeAreaView>
