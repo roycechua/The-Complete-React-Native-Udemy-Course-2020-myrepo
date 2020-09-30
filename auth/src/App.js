@@ -19,9 +19,7 @@ const firebaseConfig = {
 export default class App extends Component {
       
     componentWillMount() {
-        if(!firebase) {
-            firebase.initializeApp(firebaseConfig);
-        }
+        firebase.initializeApp(firebaseConfig);
     }
 
     render() {
