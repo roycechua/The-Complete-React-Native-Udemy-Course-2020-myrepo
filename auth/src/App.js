@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { SafeAreaView } from 'react-native';
 import firebase from 'firebase';
-import { Header } from './components/common';
+import { Header, Button, Spinner } from './components/common';
 import LoginForm from './components/LoginForm'
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -17,16 +17,42 @@ const firebaseConfig = {
 };
   
 export default class App extends Component {
-      
+    state = { loggedIn: null }  
+
     componentWillMount() {
-        firebase.initializeApp(firebaseConfig);
-    }
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        
+        firebase.auth().onAuthStateChanged((user) => {
+            if(user) {
+                this.setState({ loggedIn: true })
+            } else {
+                this.setState({ loggedIn: false })
+            }
+        });
+    };
+
+    renderContent() {
+        switch (this.state.loggedIn) {
+            case true:
+                return (
+                    <Button onPress={() => firebase.auth().signOut()}>
+                        Log out
+                    </Button>
+                );
+            case false:
+                return <LoginForm />;
+            default:
+                return <Spinner size="large" />
+        }
+    };
 
     render() {
         return (
             <SafeAreaView>
                 <Header headerText="Authentication" />
-                <LoginForm />
+                {this.renderContent()}
             </SafeAreaView>
         )
     }

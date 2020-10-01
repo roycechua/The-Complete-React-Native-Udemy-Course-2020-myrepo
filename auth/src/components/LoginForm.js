@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import firebase from 'firebase';
 import { Button, Card, CardSection, Input, Spinner } from './common';
 
@@ -38,9 +38,11 @@ class LoginForm extends Component {
         } 
         
         return (
-            <Button onPress={this.onButtonPress.bind(this)}>
-                Log In
-            </Button>
+            <View style={styles.buttonContainerStyle}>
+                <Button onPress={this.onButtonPress.bind(this)}>
+                    Log In
+                </Button>
+            </View>
         )
     } 
 
@@ -85,6 +87,9 @@ const styles = StyleSheet.create({
         fontSize: 20,
         alignSelf: 'center',
         color: 'red',
+    },
+    buttonContainerStyle: {
+        flex: 1,
     }
 })
 
