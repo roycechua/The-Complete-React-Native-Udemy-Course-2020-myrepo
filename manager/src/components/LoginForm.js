@@ -18,6 +18,7 @@ export class LoginForm extends Component {
                         label="Email"
                         placeholder="email@gmail.com"
                         onChangeText={this.onEmailChange.bind(this)}
+                        value={this.props.email}
                     />
                 </CardSection>
                 <CardSection>
@@ -32,7 +33,7 @@ export class LoginForm extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    
+    email: state.auth.email,
 })
 
 const mapDispatchToProps = {
