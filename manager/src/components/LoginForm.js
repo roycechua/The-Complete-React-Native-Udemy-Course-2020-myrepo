@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, SafeAreaView } from 'react-native';
 import { Card, CardSection, Input, Button } from './common';
 
 import { connect } from 'react-redux'
-import { onEmailChanged } from '../actions';
+import { emailChanged, passwordChanged } from '../actions';
 
 export class LoginForm extends Component {
     onEmailChange(text) {
-        this.props.onEmailChanged(text)
+        this.props.emailChanged(text)
+    }
+
+    onPasswordChange(text) {
+        this.props.passwordChanged(text)
     }
 
     render() {
         return (
+            <SafeAreaView>
             <Card>
                 <CardSection>
                     <Input
@@ -22,22 +27,30 @@ export class LoginForm extends Component {
                     />
                 </CardSection>
                 <CardSection>
-                    <Input secureTextEntry label="Password" placeholder="password" />
+                    <Input 
+                        secureTextEntry 
+                        label="Password" 
+                        placeholder="password"
+                        onChangeText={this.onPasswordChange.bind(this)}
+                        value={this.props.password} />
                 </CardSection>
                 <CardSection>
                     <Button>Login</Button>
                 </CardSection>
             </Card>
+            </SafeAreaView>
         );
     }
 }
 
 const mapStateToProps = (state) => ({
     email: state.auth.email,
+    password: state.auth.password,
 })
 
 const mapDispatchToProps = {
-    onEmailChanged
+    emailChanged,
+    passwordChanged,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
