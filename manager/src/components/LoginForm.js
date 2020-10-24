@@ -1,17 +1,35 @@
 import React, { Component } from 'react';
-import { Text, View, SafeAreaView } from 'react-native';
+import { Text, View, SafeAreaView, StyleSheet } from 'react-native';
 import { Card, CardSection, Input, Button } from './common';
 
 import { connect } from 'react-redux'
-import { emailChanged, passwordChanged } from '../actions';
+import { emailChanged, passwordChanged, loginUser } from '../actions';
 
 export class LoginForm extends Component {
     onEmailChange(text) {
-        this.props.emailChanged(text)
+        this.props.emailChanged(text);
     }
 
     onPasswordChange(text) {
-        this.props.passwordChanged(text)
+        this.props.passwordChanged(text);
+    }
+
+    onButtonPress() {
+        const { email, password } = this.props;
+
+        this.props.loginUser({ email, password });
+    }
+
+    renderError() {
+        if (this.props.error) {
+            return (
+                <View style={{ backgroundColor: 'white' }}>
+                    <Text style={styles.errorTextStyle}>
+                        {this.props.error}
+                    </Text>
+                </View>
+            )
+        }
     }
 
     render() {
@@ -34,8 +52,13 @@ export class LoginForm extends Component {
                         onChangeText={this.onPasswordChange.bind(this)}
                         value={this.props.password} />
                 </CardSection>
+
+                {this.renderError()}
+
                 <CardSection>
-                    <Button>Login</Button>
+                    <Button onPress={this.onButtonPress.bind(this)}>
+                        Login
+                    </Button>
                 </CardSection>
             </Card>
             </SafeAreaView>
@@ -46,11 +69,22 @@ export class LoginForm extends Component {
 const mapStateToProps = (state) => ({
     email: state.auth.email,
     password: state.auth.password,
+    error: state.auth.error,
 })
 
 const mapDispatchToProps = {
     emailChanged,
     passwordChanged,
+    loginUser,
 }
+
+const styles = StyleSheet.create({
+    errorTextStyle: {
+        fontSize: 20,
+        alignSelf: 'center',
+        color: 'red',
+    }
+})
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

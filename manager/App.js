@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import reducers from './src/reducers';
-
+import ReduxThunk from 'redux-thunk';
 import firebase from 'firebase';
 
 import LoginForm from './src/components/LoginForm';
 
-let store = createStore(reducers);
+let store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
 class App extends Component {
   componentWillMount() {
